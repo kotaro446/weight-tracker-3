@@ -19,10 +19,10 @@ public class WeightService {
         WeightRecord record = new WeightRecord(userId, weight, LocalDate.now());
         return weightRecordRepository.save(record);
     }
-    
+
     // ユーザーの体重記録を取得
     public List<WeightRecord> getWeightRecordsByUserId(Integer userId) {
-        return weightRecordRepository.findByUserIdOrderByTimestampDesc(userId);
+        return weightRecordRepository.findByUserIdOrderByRecordedDateDesc(userId);
     }
     
     // ユーザーの平均体重を計算

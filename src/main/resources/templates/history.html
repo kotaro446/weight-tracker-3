@@ -247,9 +247,10 @@
 
                 // データ処理
                 if (weightRecords && weightRecords.length > 0) {
-                    // 日付を新しい順から古い順に並べ替え（チャート表示用）
-                    const recordsForChart = [...weightRecords].reverse();
-
+                    // 日付を古い順から新しい順に並べ替え（チャート表示用）
+                    const recordsForChart = [...weightRecords].sort((a, b) => {
+                        return new Date(a.recordedDate) - new Date(b.recordedDate);
+                    });
                     // 日付と体重のデータを抽出
                     const dates = recordsForChart.map(record => record.recordedDate);
                     const weights = recordsForChart.map(record => record.weight);

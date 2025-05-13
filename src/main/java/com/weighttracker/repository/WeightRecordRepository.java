@@ -14,6 +14,9 @@ public interface WeightRecordRepository extends JpaRepository<WeightRecord, Long
     // タイムスタンプでの降順ソートを追加
     List<WeightRecord> findByUserIdOrderByTimestampDesc(Integer userId);
     
+    // 記録日付での降順ソートを追加
+    List<WeightRecord> findByUserIdOrderByRecordedDateDesc(Integer userId);
+    
     @Query("SELECT AVG(w.weight) FROM WeightRecord w WHERE w.userId = :userId")
     Double calculateAverageWeight(@Param("userId") Integer userId);
 }
