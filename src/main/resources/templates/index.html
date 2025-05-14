@@ -290,9 +290,6 @@
                                 <td th:unless="${averageWeight != null}">--</td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a th:href="@{/details/{id}(id=${record.id})}" class="btn btn-outline-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
                                         <a th:href="@{/delete/{id}(id=${record.id})}" class="btn btn-outline-danger"
                                             onclick="return confirm('この記録を削除してもよろしいですか？')">
                                             <i class="fas fa-trash"></i>
@@ -329,9 +326,7 @@
                     <h5><i class="fas fa-weight me-2"></i>ウェイトトラッカー</h5>
                     <p class="small">あなたの健康をサポートする体重管理アプリ</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="small">© 2025 Weight Tracker App. All rights reserved.</p>
-                </div>
+
             </div>
         </div>
     </footer>
@@ -358,5 +353,70 @@
         });
     </script>
 </body>
+
+
+<!-- スコアの詳細セクション -->
+<div class="container page-transition">
+    <div class="card mb-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-star me-2"></i>スコアの詳細</h5>
+        </div>
+        <div class="card-body">
+            <p class="mb-4">あなたの体重は平均値との差に基づいて評価されます。以下の基準でスコアが決まります：</p>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-success">
+                        <div class="card-body text-center">
+                            <div class="rank-badge rank-A mb-3">A</div>
+                            <h5 class="card-title">優秀</h5>
+                            <p class="card-text">平均体重から <strong>±0.5kg</strong> 以内</p>
+                            <div class="text-muted small">理想的な体重維持ができています</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-warning">
+                        <div class="card-body text-center">
+                            <div class="rank-badge rank-B mb-3">B</div>
+                            <h5 class="card-title">良好</h5>
+                            <p class="card-text">平均体重から <strong>±0.5〜1.0kg</strong></p>
+                            <div class="text-muted small">許容範囲内ですが注意が必要です</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-danger">
+                        <div class="card-body text-center">
+                            <div class="rank-badge rank-C mb-3">C</div>
+                            <h5 class="card-title">要注意</h5>
+                            <p class="card-text">平均体重から <strong>±1.0kg</strong> 以上</p>
+                            <div class="text-muted small">平均との差が大きいので対策を検討しましょう</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-info-circle me-2"></i>
+                平均体重は直近の最大60件のデータから算出されます。より正確な評価のために、定期的に体重を記録しましょう。
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- フッター -->
+<footer class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="fas fa-weight me-2"></i>ウェイトトラッカー</h5>
+                <p class="small">あなたの健康をサポートする体重管理アプリ</p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </html>

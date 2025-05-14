@@ -178,12 +178,8 @@
                                         +0.5 kg
                                     </span>
                                 </td>
-                                <td th:unless="${averageWeight != null}">--</td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a th:href="@{/details/{id}(id=${record.id})}" class="btn btn-outline-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
                                         <a th:href="@{/delete/{id}(id=${record.id})}" class="btn btn-outline-danger"
                                             onclick="return confirm('この記録を削除してもよろしいですか？')">
                                             <i class="fas fa-trash"></i>
@@ -219,9 +215,7 @@
                     <h5><i class="fas fa-weight me-2"></i>ウェイトトラッカー</h5>
                     <p class="small">あなたの健康をサポートする体重管理アプリ</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="small">© 2025 Weight Tracker App. All rights reserved.</p>
-                </div>
+
             </div>
         </div>
     </footer>
