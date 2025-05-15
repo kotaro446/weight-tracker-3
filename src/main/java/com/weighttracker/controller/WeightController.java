@@ -2,6 +2,7 @@ package com.weighttracker.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.weighttracker.entity.WeightRecord;
+import com.weighttracker.service.WeatherService;
 import com.weighttracker.service.WeightService;
 
 @Controller
@@ -21,6 +23,9 @@ public class WeightController {
     
     @Autowired
     private WeightService weightService;
+    
+    @Autowired
+    private WeatherService weatherService;
     
     // ホームページを表示
     @GetMapping
@@ -43,6 +48,14 @@ public class WeightController {
             model.addAttribute("latestWeight", latestWeight);
             model.addAttribute("rank", rank);
         }
+        
+        // 天気情報を取得して追加
+        Map<String, Object> weatherData = weatherService.getDefaultCityWeather();
+        model.addAttribute("weatherData", weatherData);
+        
+        // 天気情報に基づく健康アドバイスを追加
+        String healthAdvice = weatherService.generateHealthAdvice(weatherData);
+        model.addAttribute("healthAdvice", healthAdvice);
         
         return "index";
     }
@@ -108,28 +121,29 @@ public class WeightController {
         return "details";
     }
     
- @PostMapping("/add")
-public String addWeight(@RequestParam("weight") Double weight, 
+    @PostMapping("/add")
+    public String addWeight(@RequestParam("weight") Double weight, 
                         @RequestParam("recordedDate") String recordedDateStr) {
-    // デバッグ出力を追加
-    System.out.println("体重が送信されました: " + weight + ", 日付: " + recordedDateStr);
-    
-    try {
-        // 仮のユーザーID
-        Integer userId = 1;
+        // デバッグ出力を追加
+        System.out.println("体重が送信されました: " + weight + ", 日付: " + recordedDateStr);
         
-        // 文字列からLocalDate型への変換
-        LocalDate recordedDate = LocalDate.parse(recordedDateStr);
-        
-        // 選択された日付を使用して体重記録を保存
-        weightService.saveWeightRecord(userId, weight, recordedDate);
-        return "redirect:/";
-    } catch (Exception e) {
-        System.err.println("エラーが発生しました: " + e.getMessage());
-        e.printStackTrace();
-        return "redirect:/?error=true";
+        try {
+            // 仮のユーザーID
+            Integer userId = 1;
+            
+            // 文字列からLocalDate型への変換
+            LocalDate recordedDate = LocalDate.parse(recordedDateStr);
+            
+            // 選択された日付を使用して体重記録を保存
+            weightService.saveWeightRecord(userId, weight, recordedDate);
+            return "redirect:/";
+        } catch (Exception e) {
+            System.err.println("エラーが発生しました: " + e.getMessage());
+            e.printStackTrace();
+            return "redirect:/?error=true";
+        }
     }
-}
+    
     // 体重記録を削除（CRUD機能の一部）
     @GetMapping("/delete/{id}")
     public String deleteWeight(@PathVariable("id") Long id) {
