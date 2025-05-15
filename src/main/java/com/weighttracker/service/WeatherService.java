@@ -1,11 +1,11 @@
 package com.weighttracker.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class WeatherService {
@@ -82,13 +82,13 @@ public class WeatherService {
             
             // 天気に基づいたアドバイス
             if ("Rain".equalsIgnoreCase(weatherMain) || "Drizzle".equalsIgnoreCase(weatherMain)) {
-                return "雨の日は室内でのストレッチや筋トレがおすすめです。湿度が高いので水分補給を心がけましょう。";
+                return "雨の日は、外出が難しいため、室内でできるストレッチや軽めの筋トレなどを取り入れるのがおすすめです。湿度も高くなりがちなので、こまめな水分補給を意識して体調管理を行いましょう。";
             } else if ("Clear".equalsIgnoreCase(weatherMain)) {
-                return "晴れた日は軽いジョギングや散歩で体を動かすのに最適です。日焼け対策もお忘れなく。";
+                return "晴れた日は、気分転換を兼ねて軽いジョギングや散歩を楽しむのにぴったりの天候です。ただし、紫外線が強い可能性もあるため、帽子や日焼け止めなどでしっかりと日焼け対策をしておきましょう。";
             } else if ("Clouds".equalsIgnoreCase(weatherMain)) {
-                return "曇りの日は、日差しを気にせず屋外でのウォーキングやサイクリングがおすすめです。";
+                return "曇りの日は、直射日光が少なく、日差しをあまり気にせずに屋外でのウォーキングやサイクリングが楽しめる日です。気温もちょうどよく感じることが多いため、体を動かすにはとても良いコンディションと言えるでしょう。";
             } else if ("Snow".equalsIgnoreCase(weatherMain)) {
-                return "雪の日は転倒に注意し、室内でのヨガや軽いストレッチで体を温めましょう。";
+                return "雪の日は、路面が滑りやすく転倒の危険もあるため、無理に外に出ず、室内でのヨガやストレッチで体を温める運動が適しています。寒さで体がこわばりやすいため、準備運動を丁寧に行うことも忘れないようにしましょう。";
             }
             
             // 湿度に基づいたアドバイス
